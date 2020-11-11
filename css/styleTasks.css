@@ -1,0 +1,12 @@
+.taskArea
+{
+	width:50%;
+	height:80%;
+	margin:auto;
+
+	background-color:none;
+
+	grid-template-areas: 'taskHeader' 'taskContent' 'taskFooter';
+	grid-template-rows: 1fr 5fr 1fr;
+	display:grid;
+}

@@ -1,0 +1,18 @@
+.tracker
+{
+	width:35%;
+	height:35%;
+	margin:auto;
+
+	background-color:none;
+
+	grid-template-areas: 'clock' 'timer';
+	grid-template-rows: 1fr 1fr;
+	display:grid;
+}
+
+.clock, .timer
+{
+	text-align:center; 
+	margin:auto;
+}

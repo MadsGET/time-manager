@@ -1,0 +1,60 @@
+:root
+{
+	/* Colors */
+	--panelColor: rgba(100, 100, 100, 0.2);
+	--borderColor: rgba(255, 255, 255, 0.65);
+	--highlightColorDark: rgba(0, 0, 0, 0.15);
+	--highlightColorLight: rgba(255, 255, 255, 0.05);
+
+	/* Transform Sizes */
+	--borderSize: 0.2vmin;
+	
+	/* Text */
+	--baseFontSize: 2vmin;
+
+	/* Images */
+	--backgroundImage: url('../images/background.png');
+
+	/* Icons */
+	--iconArrowLeft: url('images/icon_arrowL.svg');	
+	--iconArrowRight: url('images/icon_arrowR.svg');
+	--iconPlay: url('images/icon_play.svg');
+	--iconPause: url('images/icon_pause.svg');
+}
+
+.panel
+{
+	/* Transform */
+	margin: auto;
+
+	/* Background */
+	background-color: var(--panelColor);
+}
+
+.button
+{
+	/* Transform */
+	height: 7.5vmin;
+	width: 7.5vmin;
+	min-height:32px;
+	min-width:32px;
+	margin: auto;
+	border: var(--borderColor) 0.3vmin solid;
+	border-radius: 10% 10%;
+	background-color: var(--highlightColorLight);
+	
+	/* Background Image*/
+	background-size: 70% 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.button:hover
+{
+	background-color: var(--highlightColorDark);
+}
+
+.button:active
+{
+	background-color: var(--panelColor);
+}

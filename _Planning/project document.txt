@@ -1,0 +1,27 @@
+Project Name: Timemanager.
+Description:
+- I want a page to track my hours of worktime. This page will in addition to that be
+  able to notify me when I need to take a break or finish for the day. Including this
+  I want to be able to add silent hours where there is a set pause structure.
+
+  Further more I want the ability to add tasks for the day, which I can mark as completed.
+
+  There will be an option to view my total amount of hours in an 'overview' tab.
+  A simple graph that will show either week, month and year. And the amount of time spent.
+  Aswell as the total time spent on work. 
+  (maybe silenthours = structured work time and can be two colored?)
+
+
+Theme: Gloomy glass
+
+
+- Custom Settings -
+
+Enable pause alarm: true/false;
+Pause time setting: minutes;
+
+Enable silent hours: true/false;
+Silent hours setting: from hour(00-23:59 -> to hour(00:00 - 23:59);
+
+Enable automatic stop: true/false;
+automatic stop setting: hour:minutes;
