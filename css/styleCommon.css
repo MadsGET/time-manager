@@ -31,7 +31,7 @@
 	background-color: var(--panelColor);
 }
 
-.button
+.roundedButton
 {
 	/* Transform */
 	height: 7.5vmin;
@@ -49,12 +49,28 @@
 	background-position: center;
 }
 
-.button:hover
+.defaultButton
+{
+	/* Transform */
+	height: 50%;
+	width: 15vmin;
+	margin: auto;
+
+	/* Colors */
+	background-color: var(--panelColor);
+	border: var(--borderColor) 0.1vmin solid;
+
+	/* Text */
+	font-size:125%;
+	text-align: center;
+}
+
+.button:hover, .defaultButton:hover
 {
 	background-color: var(--highlightColorDark);
 }
 
-.button:active
+.button:active, .defaultButton:active
 {
 	background-color: var(--panelColor);
 }

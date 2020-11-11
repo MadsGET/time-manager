@@ -10,3 +10,24 @@
 	grid-template-rows: 1fr 5fr 1fr;
 	display:grid;
 }
+
+.task
+{
+	font-size:110%;
+	color: snow;
+	width:100%;
+	background-color:rgba(0, 0, 0, 0);
+	border: none;
+	text-align:center;
+}
+
+.task:hover
+{
+	background-color:rgba(255, 255, 255, 0.25);
+}
+
+.taskFooter
+{
+	align-content:center;
+	display:flex;
+}

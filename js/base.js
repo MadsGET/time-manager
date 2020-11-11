@@ -1,6 +1,6 @@
 // Model
 const pages = ['Home', 'Tasks', 'Overview'];
-let pageIndex = 0;
+let pageIndex = 1;
 
 // References
 let todaysDate = new Date();
