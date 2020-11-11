@@ -7,8 +7,7 @@ class Task
 	}
 }
 
-// click to set state on task item?
-// on hover display trashcans?
+let selectedTask = -1;
 let taskList =
 [
 	new Task('Write resume for job application', true),
@@ -22,7 +21,7 @@ function getTasks()
 
 	for (let i = 0; i < taskList.length; i++)
 	{
-		result += `<input class="task" type="text" value="${taskList[i].name}"></input>`;
+		result += `<input class="task" type="text" value="${taskList[i].name}" onclick="selectedTask=${i}; drawView();"></input>`;
 	}
 
 	return result;

@@ -47,7 +47,9 @@ function getContent(contentName)
 				</div>
 
 				<div class="taskFooter" style="grid-area:taskFooter; border-top: calc(var(--borderSize) * 2.25) solid;">
+				${(selectedTask != -1) ? `<div class="defaultButton" onclick="markTask()"> Mark task </div>` : ''}
 				<div class="defaultButton" onclick="addTask()"> New task </div>
+				${(selectedTask != -1) ? `<div class="defaultButton" onclick="markTask()"> Delete task </div>` : ''}
 				</div>
 			</div>
 		`;
