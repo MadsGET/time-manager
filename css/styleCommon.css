@@ -18,6 +18,8 @@
 	/* Icons */
 	--iconArrowLeft: url('images/icon_arrowL.svg');	
 	--iconArrowRight: url('images/icon_arrowR.svg');
+	--iconArrowUp: url('images/icon_arrowU.svg');	
+	--iconArrowDown: url('images/icon_arrowD.svg');
 	--iconPlay: url('images/icon_play.svg');
 	--iconPause: url('images/icon_pause.svg');
 }

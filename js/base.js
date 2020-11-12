@@ -11,7 +11,7 @@ function drawView()
 {
 	application.innerHTML = `
 		<div class="page panel" style="border: var(--borderColor) var(--borderSize) solid;">
-			${getMenu(pages[pageIndex])}
+				${getMenu(pages[pageIndex])}
 			<div class="contentArea">
 				${getContent(pages[pageIndex])}
 			</div>

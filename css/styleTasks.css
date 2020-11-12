@@ -11,23 +11,66 @@
 	display:grid;
 }
 
+.taskContent
+{
+	height:100%;
+	width:100%;
+	text-align:center;
+	margin:auto;
+}
+
 .task
 {
-	font-size:110%;
-	color: snow;
-	width:100%;
-	background-color:rgba(0, 0, 0, 0);
-	border: none;
+	height:12.5%;
+	width: 100%;
+	margin: auto;
+	grid-template-areas: 'taskTool taskName taskTool';
+	grid-template-columns: 0.1fr 1fr 0.1fr;
+	display: grid;
+}
+
+.taskHover:hover
+{
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+.selectedTask
+{
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+.taskButton
+{	
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size: 75% 75%;
+}
+.taskButton:hover
+{
+	opacity:0.5;
+}
+
+.taskName
+{
+	height:100%;
+	align-items: center;
+	display: flex;
+	margin:auto;
 	text-align:center;
 }
 
-.task:hover
+.taskNameInput
 {
-	background-color:rgba(255, 255, 255, 0.25);
+	font-size:110%;
+	color:snow;
+	width:100%;
+	text-align:center;
+	border:none;
+	background-color:rgba(0, 0, 0, 0);
 }
 
 .taskFooter
 {
-	align-content:center;
-	display:flex;
+	align-content: center;
+	display: flex;
 }

@@ -55,3 +55,31 @@ function getContent(contentName)
 		`;
 	}
 }
+
+function getTaskButton(index)
+{
+	let inactive = `
+		<div class="task ${(selectedTask == -1) ? 'taskHover' : ''}" onclick="selectedTask=${index}; drawView();">
+			<div class="taskTool"></div>
+			<div class="taskName">
+				${taskList[index].name}
+			</div>
+			<div class="taskTool"></div>
+		</div>
+	`;
+
+	let active = `
+		<div class="task selectedTask">
+			<div class="taskTool"></div>
+			<input class="taskNameInput" type="text" value="${taskList[index].name}" class="taskName">
+
+			</input>
+			<div class="taskTool" style="grid-template-areas: 'taskButton' 'taskButton'; display:grid;">
+				<div class="taskButton" style="background-image: var(--iconArrowUp);"></div>
+				<div class="taskButton" style="background-image: var(--iconArrowDown);"></div>
+			</div>
+		</div>
+	`;
+
+	return (index == selectedTask) ? active : inactive;
+}
