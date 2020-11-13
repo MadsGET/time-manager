@@ -37,7 +37,7 @@ function getContent(contentName)
 	else if (contentName == 'Tasks')
 	{
 		return `
-			<div class="taskArea">
+			<div class="taskArea" onmouseleave="hoverIndex =-1; drawView();">
 				<div style="grid-area:taskHeader; border-bottom: calc(var(--borderSize) * 2.25) solid;">
 					<div style="width:100%; font-size:200%; margin:0; text-align:center;">${time.days[todaysDate.getDay() - 1].name}</div>
 				</div>
@@ -60,14 +60,21 @@ function getTaskButton(index)
 {
 	// References
 	let taskActive = taskList[index].state;
+	let hoverCondition = (hoverIndex == index && selectedTask == -1);
+	let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
+	let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
 
 	let inactive = `
-		<div class="task ${(selectedTask == -1) ? 'taskHover' : ''}" onclick="selectTask(${index})">
-			<div class="taskTool"></div>
+		<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
+			<div class="taskTool">
+				${(hoverCondition) ? deleteTool : ''}
+			</div>
 			<div class="taskName">
 				${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
 			</div>
-			<div class="taskTool"></div>
+			<div class="taskTool">
+				${(hoverCondition) ? openTool : ''}
+			</div>
 		</div>
 	`;
 

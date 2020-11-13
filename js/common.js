@@ -4,6 +4,9 @@ window.onload = function onPageLoaded()
 	// Set reference to the application element.
 	application = document.getElementById('application');
 
+	// Initilize task list data.
+	loadTaskList();
+
 	// Initilize storage data.
 	initializeStorage(todaysDate);
 
@@ -28,6 +31,13 @@ function onPageChange(delta)
 		// Increase page delta.
 		pageIndex += delta;
 
+		// Deselect task selection.
+		if (selectedTask != -1)
+		{
+			if (emptyStringCheck()) removeTask();
+			selectedTask = -1;
+		}
+
 		// Draw view.
 		drawView();
 
@@ -43,6 +53,9 @@ function onPageChange(delta)
 // When the page is closed.
 window.onbeforeunload = function onPageClosed(event)
 {
+	// Overwrite stored tasklist dataset.
+	saveTaskList();
+
 	// Overwrite stored dataset if session is active.
 	if (sessionActive) dataset.overwrite();
 

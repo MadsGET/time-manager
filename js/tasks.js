@@ -5,11 +5,50 @@ class Task
 		this.name = name;
 		this.state = state;
 	}
+
+	// Packs the object into a string
+	pack()
+	{
+		return '#' + this.name + ':' + this.state;
+	}
 }
 
+// Variables
+let taskList = [];
+const taskListLimit = 8;
 let selectedTask = -1;
-let taskList =[];
+let hoverIndex = -1;
 
+// Loads tasks into the array.
+function loadTaskList()
+{
+	// Check if tasks item already exists
+	if (localStorage.getItem('Tasks'))
+	{
+		let result = localStorage.getItem('Tasks').split('#');
+
+		for (let i = 1; i < result.length; i++)
+		{
+			let package = result[i].split(':');
+			taskList.push(new Task(package[0], (package[1] == 'true')));
+		}
+	}
+}
+
+// Saves tasks from the array to local storage.
+function saveTaskList()
+{
+	let result = '';
+	for (let i = 0; i < taskList.length; i++)
+	{
+		result += taskList[i].pack();
+	}
+
+	// Set localstorage data.
+	localStorage.setItem('Tasks', result);
+}
+
+// Gets tasks
 function getTasks()
 {
 	let result = '';
@@ -25,7 +64,11 @@ function getTasks()
 // Adds a template task to the array.
 function addTask()
 {
-	taskList.push(new Task('New task', true));
+	if (taskList.length != taskListLimit)
+	{
+		taskList.push(new Task('New task', true));
+	}
+
 	drawView();
 }
 
@@ -46,9 +89,9 @@ function moveTask(delta)
 }
 
 // Removes the task from the array
-function removeTask()
+function removeTask(index)
 {
-	taskList.splice(selectedTask, 1);
+	taskList.splice(index, 1);
 	selectedTask = -1;
 	drawView();
 }
@@ -69,7 +112,7 @@ function selectTask(index)
 		// If previously selected task was not none.
 		if (selectedTask != -1)
 		{
-			if (emptyStringCheck()) removeTask();
+			if (emptyStringCheck()) removeTask(selectedTask);
 		}
 
 		selectedTask = index;
@@ -81,7 +124,7 @@ function selectTask(index)
 // On task deselection
 function deselectTask()
 {
-	if (emptyStringCheck()) removeTask();
+	if (emptyStringCheck()) removeTask(selectedTask);
 	selectedTask = -1;
 	drawView();
 }

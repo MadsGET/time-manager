@@ -23,6 +23,8 @@
 	--iconPlay: url('images/icon_play.svg');
 	--iconPause: url('images/icon_pause.svg');
 	--iconCheckmark : url('images/icon_checkmark.svg');
+	--iconDelete : url('images/icon_delete.svg');
+	--iconOpen : url('images/icon_open.svg');
 }
 
 .panel
