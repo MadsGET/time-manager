@@ -22,6 +22,7 @@
 	--iconArrowDown: url('images/icon_arrowD.svg');
 	--iconPlay: url('images/icon_play.svg');
 	--iconPause: url('images/icon_pause.svg');
+	--iconCheckmark : url('images/icon_checkmark.svg');
 }
 
 .panel

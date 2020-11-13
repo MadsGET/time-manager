@@ -47,9 +47,9 @@ function getContent(contentName)
 				</div>
 
 				<div class="taskFooter" style="grid-area:taskFooter; border-top: calc(var(--borderSize) * 2.25) solid;">
-				${(selectedTask != -1) ? `<div class="defaultButton" onclick="markTask()"> Mark task </div>` : ''}
+				${(selectedTask != -1) ? `<div class="defaultButton" onclick="updateTask()"> Mark task </div>` : ''}
 				<div class="defaultButton" onclick="addTask()"> New task </div>
-				${(selectedTask != -1) ? `<div class="defaultButton" onclick="markTask()"> Delete task </div>` : ''}
+				${(selectedTask != -1) ? `<div class="defaultButton" onclick="removeTask()"> Delete task </div>` : ''}
 				</div>
 			</div>
 		`;
@@ -58,11 +58,14 @@ function getContent(contentName)
 
 function getTaskButton(index)
 {
+	// References
+	let taskActive = taskList[index].state;
+
 	let inactive = `
-		<div class="task ${(selectedTask == -1) ? 'taskHover' : ''}" onclick="selectedTask=${index}; drawView();">
+		<div class="task ${(selectedTask == -1) ? 'taskHover' : ''}" onclick="selectTask(${index})">
 			<div class="taskTool"></div>
 			<div class="taskName">
-				${taskList[index].name}
+				${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
 			</div>
 			<div class="taskTool"></div>
 		</div>
@@ -70,13 +73,15 @@ function getTaskButton(index)
 
 	let active = `
 		<div class="task selectedTask">
-			<div class="taskTool"></div>
-			<input class="taskNameInput" type="text" value="${taskList[index].name}" class="taskName">
+			<div class="taskTool">
+				<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconCheckmark);" onClick="deselectTask();"></div>
+			</div>
+			<input class="taskName taskNameInput" id="inputfield" style="${(!taskActive) ? 'text-decoration:line-through;' : ''}" type="text" value="${taskList[index].name}" onChange="taskList[${index}].name = this.value">
 
 			</input>
 			<div class="taskTool" style="grid-template-areas: 'taskButton' 'taskButton'; display:grid;">
-				<div class="taskButton" style="background-image: var(--iconArrowUp);"></div>
-				<div class="taskButton" style="background-image: var(--iconArrowDown);"></div>
+				<div class="taskButton" style="background-image: var(--iconArrowUp);" onclick="moveTask(-1)"></div>
+				<div class="taskButton" style="background-image: var(--iconArrowDown);" onclick="moveTask(+1)"></div>
 			</div>
 		</div>
 	`;

@@ -17,6 +17,21 @@ function drawView()
 			</div>
 		</div>
 	`;
+
+	// Event references
+	let inputfield = document.getElementById('inputfield');
+
+	// Events
+	if (inputfield != null)
+	{
+		inputfield.addEventListener('keyup', function (event)
+		{
+			if (event.keyCode == 13)
+			{
+				deselectTask();
+			}
+		});
+	}
 }
 
 // Timer view
