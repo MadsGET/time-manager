@@ -68,16 +68,32 @@ function getContent(contentName)
 			pillars += drawPillars(x, 31, 0.75, Math.random());
 		}
 
+		const buttonStyle = `
+			height:85%;
+			margin-bottom:0;
+			width:5%; 
+			background-size:50% 50%;
+		`;
+
 		return `
 
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
-				<svg>
+				<div class="archiveHeader">
+					<div class="triangleButton" style="${buttonStyle} margin-right:0; background-image:var(--iconTriangleL);"></div>
+					<div class="archiveHeading">November</div>
+					<div class="triangleButton" style="${buttonStyle} margin-left:0; background-image:var(--iconTriangleR);"></div>
+				</div>
+				<svg class="archiveContent">
 					<line class="svgLine" x1="0" y1="0.5%" x2="100%" y2="0.5%"/>
 					<line class="svgLine" x1="8%" y1="0.5%" x2="8%" y2="99.5%"/>
 					<line class="svgLine" x1="0" y1="99.5%" x2="100%" y2="99.5%"/>
 					${hourLines}
 					${pillars}
 				</svg>				
+				<div class="archiveFooter">
+					<div class="statistics" style="text-align:left;">Total time: 56.5 hours</div>
+					<div class="statistics" style="text-align:right;">Average time: 6.5 hours</div>
+				</div>
 			</div>
 		`;
 	}

@@ -1,15 +1,39 @@
 .archiveArea
 {
 	/* Transform */
+	height:75%;
+	width:75%;
+	margin:auto;
+
+	grid-template-areas: 'archiveHeader' 'archiveContent' 'archiveFooter';
+	grid-template-rows: auto 6fr auto;
+	display:grid;
+}
+
+.archiveHeader, .archiveFooter
+{
 	height:100%;
 	width:100%;
-	margin:0;
 
-	background-color:none;
-
-	/* Flex */
 	align-content:center;
 	display:flex;
+}
+
+.statistics
+{
+	font-size:100%;
+	width:50%;
+	margin:auto;
+	margin-top:0.5%;
+}
+
+.archiveHeading
+{
+	margin:auto;
+	margin-left:0;
+	margin-right:0;
+	font-size:250%;
+	text-align:center;
 }
 
 .svgLine
@@ -26,8 +50,11 @@
 
 svg
 {
-	height:50vmin;
+	background-color: rgba(255, 255, 255, 0.05);
+	height: 100%;
+	width: 100%;
+	/*height:50vmin;
 	width:75vmin;
 	margin:auto;
-	background-color:none;
+	background-color:none;*/
 }

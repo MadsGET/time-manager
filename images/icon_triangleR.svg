@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="11.875" viewBox="0 0 12 11.875">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-opacity: 0.5;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Arrow_Right_copy" data-name="Arrow Right copy" class="cls-1" d="M708,211.66l12,5.943-12,5.944V211.66Z" transform="translate(-708 -211.656)"/>
+</svg>

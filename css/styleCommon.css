@@ -25,6 +25,8 @@
 	--iconCheckmark : url('images/icon_checkmark.svg');
 	--iconDelete : url('images/icon_delete.svg');
 	--iconOpen : url('images/icon_open.svg');
+	--iconTriangleL : url('images/icon_triangleL.svg');
+	--iconTriangleR : url('images/icon_triangleR.svg');
 }
 
 .panel
@@ -54,6 +56,25 @@
 	background-position: center;
 }
 
+.triangleButton
+{
+	margin: auto;
+	/* Background Image*/
+	background-size: 70% 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.triangleButton:hover
+{
+	opacity:0.5;
+}
+
+.triangleButton:active
+{
+	opacity:0.8;
+}
+
 .defaultButton
 {
 	/* Transform */
@@ -75,7 +96,7 @@
 	background-color: var(--highlightColorDark);
 }
 
-.button:active, .defaultButton:active
+.button:active, .defaultButton:active 
 {
 	background-color: var(--panelColor);
 }
