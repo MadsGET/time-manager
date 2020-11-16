@@ -56,7 +56,7 @@ function getContent(contentName)
 	else
 	{
 		const topLine =			`<line class="svgLine" x1="0" y1="7.5%" x2="100%" y2="7.5%"/>`;
-		const verticalLine =	`<line class="svgLine" x1="8.5%" y1="0" x2="8.5%" y2="99%"/>`;
+		const verticalLine =	`<line class="svgLine" x1="8%" y1="0" x2="8%" y2="99%"/>`;
 		const bottomLine =		`<line class="svgLine" x1="0" y1="99%" x2="100%" y2="99%"/>`;
 
 		let hourLines = '';
@@ -77,7 +77,7 @@ function getContent(contentName)
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
 				<svg>
 					<text x="0.75%" y="5%" fill="snow">Hours</text>
-					<text x="45%" y="5%" fill="snow" style="font-size:3vmin">November</text>
+					<text x="41.5%" y="5%" fill="snow" style="font-size:3vmin">November</text>
 					${topLine}
 					${verticalLine}
 					${bottomLine}
