@@ -66,14 +66,10 @@ function getContent(contentName)
 			hourLines += drawHourLines(i);
 		}
 
-		let original = `<rect x="8.5%" y="7.5%" width="5%" height="91.5%" style="fill:rgb(255,255,255, 0.25);" />`;
 		let pillars = '';
-		let colorSwitch = false;
-		let colors =['rgba(128, 0, 0, 0.75)', 'rgba(0, 0, 128, 0.75)']
-		for (let x = 0; x < 16; x++)
+		for (let x = 0; x < 31; x++)
 		{
-			pillars += drawPillars(x, 16, (colorSwitch) ? colors[0] : colors[1]);
-			colorSwitch = !colorSwitch;
+			pillars += drawPillars(x, 31, 0.6, Math.random());
 		}
 
 		return `
@@ -105,17 +101,19 @@ function drawHourLines(index)
 	`;
 }
 
-function drawPillars(index, max, colors)
+// Takes in and index for current, length for array. With as modifier (ex: 0.5)
+function drawPillars(index, length, widthModifier, heightModifier)
 {
 	// How much space each pillar is assigned.
-	const fillValue = (91.5 / max);
+	const fillValue = (91.5 / length);
 
 	// Max pillar height.
 	const maxHeight = 90.5;
+	const lesserHeight = maxHeight * heightModifier;
+	const greaterHeight = maxHeight * (1 - heightModifier);
 
 	// Calculated pillar width, and calculated leftover.
-	const pillarWidthModifier = 0.75;
-	const leftover = fillValue * (1 - pillarWidthModifier) / 2;
+	const leftover = fillValue * (1 - widthModifier) / 2;
 
 	// Start position in x axis.
 	const xStartPos = leftover + 8.5;
@@ -124,7 +122,7 @@ function drawPillars(index, max, colors)
 	const xPos = xStartPos + fillValue * index;
 
 	return `
-		<rect x="${xPos}%" y="8%" width="${fillValue * pillarWidthModifier}%" height="${maxHeight}%" style="fill:${colors};" />
+		<rect x="${xPos}%" y="${8.25 + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
 	`;
 }
 
