@@ -1,0 +1,33 @@
+.archiveArea
+{
+	/* Transform */
+	height:100%;
+	width:100%;
+	margin:0;
+
+	background-color:none;
+
+	/* Flex */
+	align-content:center;
+	display:flex;
+}
+
+.svgLine
+{
+	stroke: rgba(255,255,255, 0.5);
+	stroke-width: 0.35%;
+}
+
+.svgLineFaint
+{
+	stroke: rgba(255,255,255, 0.1);
+	stroke-width: 0.35%;
+}
+
+svg
+{
+	height:50vmin;
+	width:75vmin;
+	margin:auto;
+	background-color:none;
+}

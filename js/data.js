@@ -34,8 +34,7 @@ function getContent(contentName)
 			</div>
 		`;
 	}
-	else if (contentName == 'Tasks')
-	{
+	else if (contentName == 'Tasks') {
 		return `
 			<div class="taskArea" onmouseleave="hoverIndex =-1; drawView();">
 				<div style="grid-area:taskHeader; border-bottom: calc(var(--borderSize) * 2.25) solid;">
@@ -48,12 +47,85 @@ function getContent(contentName)
 
 				<div class="taskFooter" style="grid-area:taskFooter; border-top: calc(var(--borderSize) * 2.25) solid;">
 				${(selectedTask != -1) ? `<div class="defaultButton" onclick="updateTask()"> Mark task </div>` : ''}
-				<div class="defaultButton" ${(taskList.length == taskListLimit) ? 'style="background-color:rgba(0, 0, 0, 0.25);"': ''} onclick="addTask()"> New task </div>
+				<div class="defaultButton" ${(taskList.length == taskListLimit) ? 'style="background-color:rgba(0, 0, 0, 0.25);"' : ''} onclick="addTask()"> New task </div>
 				${(selectedTask != -1) ? `<div class="defaultButton" onclick="removeTask(selectedTask)"> Delete task </div>` : ''}
 				</div>
 			</div>
 		`;
 	}
+	else
+	{
+		const topLine =			`<line class="svgLine" x1="0" y1="7.5%" x2="100%" y2="7.5%"/>`;
+		const verticalLine =	`<line class="svgLine" x1="8.5%" y1="0" x2="8.5%" y2="99%"/>`;
+		const bottomLine =		`<line class="svgLine" x1="0" y1="99%" x2="100%" y2="99%"/>`;
+
+		let hourLines = '';
+		for (let i = 0; i <12; i++)
+		{
+			// Always draws an unused line. (Might not be a problem)
+			hourLines += drawHourLines(i);
+		}
+
+		let original = `<rect x="8.5%" y="7.5%" width="5%" height="91.5%" style="fill:rgb(255,255,255, 0.25);" />`;
+		let pillars = '';
+		let colorSwitch = false;
+		let colors =['rgba(128, 0, 0, 0.75)', 'rgba(0, 0, 128, 0.75)']
+		for (let x = 0; x < 16; x++)
+		{
+			pillars += drawPillars(x, 16, (colorSwitch) ? colors[0] : colors[1]);
+			colorSwitch = !colorSwitch;
+		}
+
+		return `
+
+			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
+				<svg>
+					<text x="0.75%" y="5%" fill="snow">Hours</text>
+					<text x="45%" y="5%" fill="snow" style="font-size:3vmin">November</text>
+					${topLine}
+					${verticalLine}
+					${bottomLine}
+					${hourLines}
+					${pillars}
+				</svg>				
+			</div>
+		`;
+	}
+}
+
+function drawHourLines(index)
+{
+	// Math has a base value that is subtracted with movement value times index.
+	const lineMath = 92 - (7.7 * index);
+	const textMath = 97.5 - (7.7 * index);
+	const textCentering = (index >= 9) ? '2.5' : '3.25';
+	return `
+		<text x="${textCentering}%" y="${textMath}%" fill="rgba(255, 255, 255, 0.75)"style="font-size:3vmin">${(index+1)}</text>
+		<line class="svgLineFaint" x1="0" y1="${lineMath}%" x2="100%" y2="${lineMath}%"/>
+	`;
+}
+
+function drawPillars(index, max, colors)
+{
+	// How much space each pillar is assigned.
+	const fillValue = (91.5 / max);
+
+	// Max pillar height.
+	const maxHeight = 90.5;
+
+	// Calculated pillar width, and calculated leftover.
+	const pillarWidthModifier = 0.75;
+	const leftover = fillValue * (1 - pillarWidthModifier) / 2;
+
+	// Start position in x axis.
+	const xStartPos = leftover + 8.5;
+
+	// Calculated x position for each pillar.
+	const xPos = xStartPos + fillValue * index;
+
+	return `
+		<rect x="${xPos}%" y="8%" width="${fillValue * pillarWidthModifier}%" height="${maxHeight}%" style="fill:${colors};" />
+	`;
 }
 
 function getTaskButton(index)

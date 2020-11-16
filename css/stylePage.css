@@ -34,8 +34,8 @@ body
 .page
 {
 	/* Transform */
-	height: 80%;
-	width: 60%;
+	height: 80vmin;
+	width: 100vmin;
 
 	/* Grid */
 	grid-template-rows: 1.5fr 10fr;
