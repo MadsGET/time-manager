@@ -48,8 +48,8 @@ function getContent(contentName)
 
 				<div class="taskFooter" style="grid-area:taskFooter; border-top: calc(var(--borderSize) * 2.25) solid;">
 				${(selectedTask != -1) ? `<div class="defaultButton" onclick="updateTask()"> Mark task </div>` : ''}
-				<div class="defaultButton" onclick="addTask()"> New task </div>
-				${(selectedTask != -1) ? `<div class="defaultButton" onclick="removeTask()"> Delete task </div>` : ''}
+				<div class="defaultButton" ${(taskList.length == taskListLimit) ? 'style="background-color:rgba(0, 0, 0, 0.25);"': ''} onclick="addTask()"> New task </div>
+				${(selectedTask != -1) ? `<div class="defaultButton" onclick="removeTask(selectedTask)"> Delete task </div>` : ''}
 				</div>
 			</div>
 		`;
@@ -60,25 +60,29 @@ function getTaskButton(index)
 {
 	// References
 	let taskActive = taskList[index].state;
-	let hoverCondition = (hoverIndex == index && selectedTask == -1);
-	let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
-	let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
 
-	let inactive = `
-		<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
-			<div class="taskTool">
-				${(hoverCondition) ? deleteTool : ''}
-			</div>
-			<div class="taskName">
-				${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
-			</div>
-			<div class="taskTool">
-				${(hoverCondition) ? openTool : ''}
-			</div>
-		</div>
-	`;
+	if (index != selectedTask)
+	{ 
+		let hoverCondition = (hoverIndex == index && selectedTask == -1);
+		let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
+		let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
 
-	let active = `
+		return `
+			<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
+				<div class="taskTool">
+					${(hoverCondition) ? deleteTool : ''}
+				</div>
+				<div class="taskName">
+					${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
+				</div>
+				<div class="taskTool">
+					${(hoverCondition) ? openTool : ''}
+				</div>
+			</div>
+		`;
+	}
+
+	return `
 		<div class="task selectedTask">
 			<div class="taskTool">
 				<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconCheckmark);" onClick="deselectTask();"></div>
@@ -92,6 +96,4 @@ function getTaskButton(index)
 			</div>
 		</div>
 	`;
-
-	return (index == selectedTask) ? active : inactive;
 }
