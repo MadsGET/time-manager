@@ -7,8 +7,9 @@ window.onload = function onPageLoaded()
 	// Initilize task list data.
 	loadTaskList();
 
-	// Initilize storage data.
+	// Initilize storage and archive data.
 	initializeStorage(todaysDate);
+	initalizeArchive();
 
 	// Initialize routine with tick equal to stored data.
 	if (dataset.items[dataIndex].seconds != 0) routineTick = dataset.items[dataIndex].seconds;
