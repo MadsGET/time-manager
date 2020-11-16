@@ -13,7 +13,7 @@ function initalizeArchive()
 			archiveData[i] = new Dataset(new Date(todaysDate.getFullYear(), (i + 1), 0));
 
 			// Setup archive statistics.
-			archiveStatistics[i] = { totalTime: '', averageTime: '', length: 31 };
+			archiveStatistics[i] = { totalTime: '', averageTime: '', length: 31 }; // Highest score to set diagram table length???
 		}
 		else
 		{
