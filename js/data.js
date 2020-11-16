@@ -55,29 +55,27 @@ function getContent(contentName)
 	}
 	else
 	{
-		const topLine =			`<line class="svgLine" x1="0" y1="7.5%" x2="100%" y2="7.5%"/>`;
-		const verticalLine =	`<line class="svgLine" x1="8%" y1="0" x2="8%" y2="99%"/>`;
-		const bottomLine =		`<line class="svgLine" x1="0" y1="99%" x2="100%" y2="99%"/>`;
+		const topLine		= `<line class="svgLine" x1="0" y1="0.5%" x2="100%" y2="0.5%"/>`;
+		const verticalLine	= `<line class="svgLine" x1="8%" y1="0.5%" x2="8%" y2="99.5%"/>`;
+		const bottomLine	= `<line class="svgLine" x1="0" y1="99.5%" x2="100%" y2="99.5%"/>`;
 
 		let hourLines = '';
 		for (let i = 0; i <12; i++)
 		{
 			// Always draws an unused line. (Might not be a problem)
-			hourLines += drawHourLines(i);
+			hourLines += drawHourLines(i, 12);
 		}
 
 		let pillars = '';
 		for (let x = 0; x < 31; x++)
 		{
-			pillars += drawPillars(x, 31, 0.6, Math.random());
+			pillars += drawPillars(x, 31, 0.75, Math.random());
 		}
 
 		return `
 
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
 				<svg>
-					<text x="0.75%" y="5%" fill="snow">Hours</text>
-					<text x="41.5%" y="5%" fill="snow" style="font-size:3vmin">November</text>
 					${topLine}
 					${verticalLine}
 					${bottomLine}
@@ -89,15 +87,17 @@ function getContent(contentName)
 	}
 }
 
-function drawHourLines(index)
+function drawHourLines(index, length)
 {
-	// Math has a base value that is subtracted with movement value times index.
-	const lineMath = 92 - (7.7 * index);
-	const textMath = 97.5 - (7.7 * index);
-	const textCentering = (index >= 9) ? '2.5' : '3.25';
+	// How much space each element is assigned.
+	let fillValue = 99 / length;
+	let thisElementFillValue = fillValue * index;
+	let textElementValue = (fillValue * 0.7) + fillValue * index;
+	let textCenterValue = (length - index >= 10) ? '2.75' : '3.5';
+
 	return `
-		<text x="${textCentering}%" y="${textMath}%" fill="rgba(255, 255, 255, 0.75)"style="font-size:3vmin">${(index+1)}</text>
-		<line class="svgLineFaint" x1="0" y1="${lineMath}%" x2="100%" y2="${lineMath}%"/>
+		<text x="${textCenterValue}%" y="${textElementValue}%" fill="snow" style="font-size:2vmin">${(length - index)}</text>
+		<line class="svgLineFaint" x1="0" y1="${thisElementFillValue}%" x2="100%" y2="${thisElementFillValue}%"/>
 	`;
 }
 
@@ -105,7 +105,7 @@ function drawHourLines(index)
 function drawPillars(index, length, widthModifier, heightModifier)
 {
 	// How much space each pillar is assigned.
-	const fillValue = (91.5 / length);
+	const fillValue = 91.5 / length;
 
 	// Max pillar height.
 	const maxHeight = 90.5;
@@ -122,7 +122,7 @@ function drawPillars(index, length, widthModifier, heightModifier)
 	const xPos = xStartPos + fillValue * index;
 
 	return `
-		<rect x="${xPos}%" y="${8.25 + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
+		<rect x="${xPos}%" y="${8.75 + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
 	`;
 }
 
