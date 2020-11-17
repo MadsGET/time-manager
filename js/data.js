@@ -55,21 +55,17 @@ function getContent(contentName)
 	}
 	else
 	{
-		// Reference to statistics object.
-		const statistics = archiveStatistics[archivePages[archivePagesIndex].reference];
-		const data = archiveData[archivePages[archivePagesIndex].reference];
-
 		let hourLines = '';
-		for (let i = 0; i < statistics.highestValue; i++) // CLAMP BETWEEN 8, 16.
+		for (let i = 0; i < 12; i++) // CLAMP BETWEEN 8, 16.
 		{
 			// Always draws an unused line.
-			hourLines += drawHourLines(i, statistics.highestValue);
+			hourLines += drawHourLines(i, 12);
 		}
 
 		let pillars = '';
-		for (let x = 0; x < statistics.length; x++)
+		for (let x = 0; x < 31; x++)
 		{
-			pillars += drawPillars(x, statistics.length, 0.75, 0.1); // Clamp minimum fill length
+			pillars += drawPillars(x, 31, 0.75, Math.random());
 		}
 
 		const buttonStyle = `
@@ -84,7 +80,7 @@ function getContent(contentName)
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
 				<div class="archiveHeader">
 					<div class="triangleButton" style="${buttonStyle} margin-right:0; background-image:var(--iconTriangleL);"></div>
-					<div class="archiveHeading">${data.key}</div>
+					<div class="archiveHeading">November</div>
 					<div class="triangleButton" style="${buttonStyle} margin-left:0; background-image:var(--iconTriangleR);"></div>
 				</div>
 				<svg class="archiveContent">
