@@ -36,7 +36,7 @@ class DiagramData
 			const dataValue = hours + parseFloat((minutes / 60).toFixed(1));
 
 			// Set data within items.
-			this.items[day] = dataValue;
+			this.items[day-1] = dataValue;
 
 			// Add value to total and average time.
 			this.totalTime += dataValue;

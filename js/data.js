@@ -55,21 +55,26 @@ function getContent(contentName)
 	}
 	else
 	{
+		// Reference to the diagram object.
 		const diagramObject = diagramData[archivePages[archiveIndex].reference];
 
+		// Hour line and text setup.
 		let hourLines = '';
-		for (let i = 0; i < diagramObject.highestTime; i++) // CLAMP BETWEEN 8, 16.
+		let hourValue = mathf.clamp(diagramObject.highestTime + 1, 8, 16);
+		for (let i = 0; i < hourValue; i++)
 		{
 			// Always draws an unused line.
-			hourLines += drawHourLines(i, diagramObject.highestTime);
+			hourLines += drawHourLines(i, hourValue);
 		}
 
+		// Pillars setup.
 		let pillars = '';
 		for (let x = 0; x < diagramObject.items.length; x++)
 		{
-			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / diagramObject.highestTime));
+			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / hourValue));
 		}
 
+		// Buttons
 		const buttonStyle = `
 			height:85%;
 			margin-bottom:0;
@@ -77,13 +82,25 @@ function getContent(contentName)
 			background-size:50% 50%;
 		`;
 
+		const buttonLStyle = `margin-right:0; background-image:var(--iconTriangleL);`;
+		const buttonRStyle = `margin-left:0; background-image:var(--iconTriangleR);`;
+
+		const displayButtons = (archivePages.length == 1);
+		const buttonL = `<div class="triangleButton" style="${buttonStyle} ${buttonLStyle}" onclick="archiveIndex = mathf.boundaryLimit(archiveIndex -1, archivePages.length-1, false); drawView();"></div>`;
+		const buttonR = `<div class="triangleButton" style="${buttonStyle} ${buttonRStyle}" onclick="archiveIndex = mathf.boundaryLimit(archiveIndex +1, archivePages.length-1, false); drawView();"></div>`;
+
+		// Statistics
+		const averageTime = (diagramObject.totalTime / diagramObject.items.length).toFixed(1);
+		const statisticsL = `<div class="statistics" style="text-align:left;">Total time: ${diagramObject.totalTime} hours</div>`;
+		const statisticsR = `<div class="statistics" style="text-align:right;">Average time: ${averageTime} hours</div>`;
+
 		return `
 
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
 				<div class="archiveHeader">
-					<div class="triangleButton" style="${buttonStyle} margin-right:0; background-image:var(--iconTriangleL);"></div>
-					<div class="archiveHeading">November</div>
-					<div class="triangleButton" style="${buttonStyle} margin-left:0; background-image:var(--iconTriangleR);"></div>
+					${(displayButtons) ? '' : buttonL}
+					<div ${(displayButtons) ? '' : 'style="margin-left:0; margin-right:0;"'} class="archiveHeading">${diagramObject.key}</div>
+					${(displayButtons) ? '' : buttonR}
 				</div>
 				<svg class="archiveContent">
 					<line class="svgLine" x1="0" y1="0.5%" x2="100%" y2="0.5%"/>
@@ -93,8 +110,8 @@ function getContent(contentName)
 					${pillars}
 				</svg>				
 				<div class="archiveFooter">
-					<div class="statistics" style="text-align:left;">Total time: 56.5 hours</div>
-					<div class="statistics" style="text-align:right;">Average time: 6.5 hours</div>
+					${statisticsL}
+					${statisticsR}
 				</div>
 			</div>
 		`;
@@ -123,7 +140,7 @@ function drawPillars(index, length, widthModifier, heightModifier)
 
 	// Max pillar height.
 	const maxHeight = 1;
-	const minHeight = 98; // Actually min height.
+	const minHeight = 98;
 	const lesserHeight = minHeight * heightModifier;
 	const greaterHeight = minHeight * (1 - heightModifier);
 
@@ -136,9 +153,10 @@ function drawPillars(index, length, widthModifier, heightModifier)
 	// Calculated x position for each pillar.
 	const xPos = xStartPos + fillValue * index;
 
-	return `
+	// Does not draw anything if no data is parsed.
+	return (greaterHeight != 0) ? `
 		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
-	`;
+	` : '';
 }
 
 function getTaskButton(index)
