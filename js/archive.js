@@ -1,5 +1,7 @@
 // Variables
 let diagramData = [];
+let archivePages = [];
+let archiveIndex = 0;
 
 class DiagramData
 {
@@ -8,9 +10,7 @@ class DiagramData
 		this.key = time.months[date.getMonth()].name;
 		this.items = [];
 		this.totalTime = 0;
-		this.averageTime = 0;
 		this.highestTime = 0;
-
 
 		// Loop through value array and setup to month size.
 		for (let i = 0; i < date.getDate(); i++)
@@ -40,14 +40,10 @@ class DiagramData
 
 			// Add value to total and average time.
 			this.totalTime += dataValue;
-			this.averageTime += dataValue;
 
 			// Set highest time value.
 			if (this.highestTime < dataValue) this.highestTime = dataValue;
 		}
-
-		// Calculate average time spent.
-		this.averageTime = (this.averageTime / date.getDate());
 	}
 }
 
@@ -58,12 +54,17 @@ function initalizeArchive() // Live update???
 	{
 		if (localStorage.getItem(time.months[i].name))
 		{
-
 			// Setup date for dataset.
 			let datasetDate = new Date(todaysDate.getFullYear(), (i + 1), 0);
 
 			// Setup archive data.
 			diagramData[i] = new DiagramData(datasetDate);
+
+			// Setup archive pages.
+			archivePages.push({ name: time.months[i].name, reference: i });
+
+			// Set archive index.
+			archiveIndex = archivePages.length - 1;
 		}
 		else
 		{
