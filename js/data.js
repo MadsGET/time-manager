@@ -68,7 +68,6 @@ function getContent(contentName)
 		for (let x = 0; x < diagramObject.items.length; x++)
 		{
 			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / diagramObject.highestTime));
-			console.log(diagramObject.items[x] / diagramObject.highestTime);
 		}
 
 		const buttonStyle = `
