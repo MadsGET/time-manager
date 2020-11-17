@@ -104,7 +104,7 @@ function getContent(contentName)
 		const averageTime = (diagramObject.totalTime / diagramObject.items.length).toFixed(1);
 		const statisticsL = `<div class="statistics" style="text-align:left;">Total time: ${diagramObject.totalTime} hours</div>`;
 		const statisticsR = `<div class="statistics" style="text-align:right;">Average time: ${averageTime} hours</div>`;
-
+		
 		return `
 
 			<div class="archiveArea" viewBox="0 0 100 100" preserveAspectRation="none">
