@@ -55,17 +55,20 @@ function getContent(contentName)
 	}
 	else
 	{
+		const diagramObject = diagramData[archivePages[archiveIndex].reference];
+
 		let hourLines = '';
-		for (let i = 0; i < 12; i++) // CLAMP BETWEEN 8, 16.
+		for (let i = 0; i < diagramObject.highestTime; i++) // CLAMP BETWEEN 8, 16.
 		{
 			// Always draws an unused line.
-			hourLines += drawHourLines(i, 12);
+			hourLines += drawHourLines(i, diagramObject.highestTime);
 		}
 
 		let pillars = '';
-		for (let x = 0; x < 31; x++)
+		for (let x = 0; x < diagramObject.items.length; x++)
 		{
-			pillars += drawPillars(x, 31, 0.75, Math.random());
+			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / diagramObject.highestTime));
+			console.log(diagramObject.items[x] / diagramObject.highestTime);
 		}
 
 		const buttonStyle = `
@@ -120,9 +123,10 @@ function drawPillars(index, length, widthModifier, heightModifier)
 	const fillValue = 91.5 / length;
 
 	// Max pillar height.
-	const maxHeight = 90.5;
-	const lesserHeight = maxHeight * heightModifier;
-	const greaterHeight = maxHeight * (1 - heightModifier);
+	const maxHeight = 1;
+	const minHeight = 98; // Actually min height.
+	const lesserHeight = minHeight * heightModifier;
+	const greaterHeight = minHeight * (1 - heightModifier);
 
 	// Calculated pillar width, and calculated leftover.
 	const leftover = fillValue * (1 - widthModifier) / 2;
@@ -134,7 +138,7 @@ function drawPillars(index, length, widthModifier, heightModifier)
 	const xPos = xStartPos + fillValue * index;
 
 	return `
-		<rect x="${xPos}%" y="${8.75 + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
+		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
 	`;
 }
 

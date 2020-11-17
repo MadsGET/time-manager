@@ -42,7 +42,7 @@ class DiagramData
 			this.totalTime += dataValue;
 
 			// Set highest time value.
-			if (this.highestTime < dataValue) this.highestTime = dataValue;
+			if (this.highestTime < dataValue) this.highestTime = Math.round(dataValue);
 		}
 	}
 }
