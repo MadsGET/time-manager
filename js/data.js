@@ -67,11 +67,22 @@ function getContent(contentName)
 			hourLines += drawHourLines(i, hourValue);
 		}
 
-		// Pillars setup.
+		// Reference values for pillar setup.
 		let pillars = '';
+		let widthValue = 0.75;
+
+		// Loop through each dataset and create a pillar.
 		for (let x = 0; x < diagramObject.items.length; x++)
 		{
-			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / hourValue), diagramObject.items[x]);
+			// Guard clause; on empty value.
+			if (diagramObject.items[x] == null || diagramObject.items[x] == '') continue;
+
+			// Setup length modifier and on hover info.
+			let lengthModifier = 1 - (diagramObject.items[x] / hourValue);
+			let hoverInfo = `Day ${time.formatNumber(x)} lasted: ${diagramObject.items[x]} hour(s)`;
+
+			// Add generated SVG code to pillars variable.
+			pillars += drawPillars(x, diagramObject.items.length, widthValue, lengthModifier, hoverInfo);
 		}
 
 		// Buttons
@@ -116,89 +127,4 @@ function getContent(contentName)
 			</div>
 		`;
 	}
-}
-
-function drawHourLines(index, length)
-{
-	// How much space each element is assigned.
-	let fillValue = 99 / length;
-	let thisElementFillValue = fillValue * index;
-	let textElementValue = (fillValue * 0.7) + fillValue * index;
-	let textCenterValue = (length - index >= 10) ? '2.75' : '3.5';
-
-	return `
-		<text x="${textCenterValue}%" y="${textElementValue}%" fill="snow" style="font-size:2vmin">${(length - index)}</text>
-		<line class="svgLineFaint" x1="0" y1="${thisElementFillValue}%" x2="100%" y2="${thisElementFillValue}%"/>
-	`;
-}
-
-// Takes in and index for current, length for array. With as modifier (ex: 0.5)
-function drawPillars(index, length, widthModifier, heightModifier, hoverInfo)
-{
-	// How much space each pillar is assigned.
-	const fillValue = 91.5 / length;
-
-	// Max pillar height.
-	const maxHeight = 1;
-	const minHeight = 98;
-	const lesserHeight = minHeight * heightModifier;
-	const greaterHeight = minHeight * (1 - heightModifier);
-
-	// Calculated pillar width, and calculated leftover.
-	const leftover = fillValue * (1 - widthModifier) / 2;
-
-	// Start position in x axis.
-	const xStartPos = leftover + 8.5;
-
-	// Calculated x position for each pillar.
-	const xPos = xStartPos + fillValue * index;
-
-	// Does not draw anything if no data is parsed.
-	return (greaterHeight != 0) ? `
-		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3); user-select:all;">
-			<title>${hoverInfo} hour(s)</title>
-		</rect>
-	` : '';
-}
-
-function getTaskButton(index)
-{
-	// References
-	let taskActive = taskList[index].state;
-
-	if (index != selectedTask)
-	{ 
-		let hoverCondition = (hoverIndex == index && selectedTask == -1);
-		let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
-		let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
-
-		return `
-			<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
-				<div class="taskTool">
-					${(hoverCondition) ? deleteTool : ''}
-				</div>
-				<div class="taskName">
-					${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
-				</div>
-				<div class="taskTool">
-					${(hoverCondition) ? openTool : ''}
-				</div>
-			</div>
-		`;
-	}
-
-	return `
-		<div class="task selectedTask">
-			<div class="taskTool">
-				<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconCheckmark);" onClick="deselectTask();"></div>
-			</div>
-			<input class="taskName taskNameInput" id="inputfield" style="${(!taskActive) ? 'text-decoration:line-through;' : ''}" type="text" value="${taskList[index].name}" onChange="taskList[${index}].name = this.value">
-
-			</input>
-			<div class="taskTool" style="grid-template-areas: 'taskButton' 'taskButton'; display:grid;">
-				<div class="taskButton" style="background-image: var(--iconArrowUp);" onclick="moveTask(-1)"></div>
-				<div class="taskButton" style="background-image: var(--iconArrowDown);" onclick="moveTask(+1)"></div>
-			</div>
-		</div>
-	`;
 }

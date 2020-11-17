@@ -135,3 +135,45 @@ function emptyStringCheck()
 	let newString = taskList[selectedTask].name.replaceAll(' ', '');
 	return (newString == '');
 }
+
+function getTaskButton(index)
+{
+	// References
+	let taskActive = taskList[index].state;
+
+	if (index != selectedTask)
+	{ 
+		let hoverCondition = (hoverIndex == index && selectedTask == -1);
+		let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
+		let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
+
+		return `
+			<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
+				<div class="taskTool">
+					${(hoverCondition) ? deleteTool : ''}
+				</div>
+				<div class="taskName">
+					${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
+				</div>
+				<div class="taskTool">
+					${(hoverCondition) ? openTool : ''}
+				</div>
+			</div>
+		`;
+	}
+
+	return `
+		<div class="task selectedTask">
+			<div class="taskTool">
+				<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconCheckmark);" onClick="deselectTask();"></div>
+			</div>
+			<input class="taskName taskNameInput" id="inputfield" style="${(!taskActive) ? 'text-decoration:line-through;' : ''}" type="text" value="${taskList[index].name}" onChange="taskList[${index}].name = this.value">
+
+			</input>
+			<div class="taskTool" style="grid-template-areas: 'taskButton' 'taskButton'; display:grid;">
+				<div class="taskButton" style="background-image: var(--iconArrowUp);" onclick="moveTask(-1)"></div>
+				<div class="taskButton" style="background-image: var(--iconArrowDown);" onclick="moveTask(+1)"></div>
+			</div>
+		</div>
+	`;
+}
