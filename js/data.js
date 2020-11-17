@@ -71,7 +71,7 @@ function getContent(contentName)
 		let pillars = '';
 		for (let x = 0; x < diagramObject.items.length; x++)
 		{
-			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / hourValue));
+			pillars += drawPillars(x, diagramObject.items.length, 0.75, 1 - (diagramObject.items[x] / hourValue), diagramObject.items[x]);
 		}
 
 		// Buttons
@@ -133,7 +133,7 @@ function drawHourLines(index, length)
 }
 
 // Takes in and index for current, length for array. With as modifier (ex: 0.5)
-function drawPillars(index, length, widthModifier, heightModifier)
+function drawPillars(index, length, widthModifier, heightModifier, hoverInfo)
 {
 	// How much space each pillar is assigned.
 	const fillValue = 91.5 / length;
@@ -155,7 +155,9 @@ function drawPillars(index, length, widthModifier, heightModifier)
 
 	// Does not draw anything if no data is parsed.
 	return (greaterHeight != 0) ? `
-		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3);" />
+		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3); user-select:all;">
+			<title>${hoverInfo} hour(s)</title>
+		</rect>
 	` : '';
 }
 
