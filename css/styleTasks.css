@@ -30,16 +30,11 @@
 	display: grid;
 }
 
-.task:hover
+.taskHover:hover, .selectedTask
 {
 	grid-template-areas: 'taskTool taskName taskTool';
 	grid-template-columns: 0.1fr 1fr 0.1fr;
 	display: grid;
-	background-color: rgba(255, 255, 255, 0.15);
-}
-
-.selectedTask
-{
 	background-color: rgba(255, 255, 255, 0.15);
 }
 

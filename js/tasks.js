@@ -146,7 +146,7 @@ function getTaskButton(index)
 		let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
 
 		return `
-			<div class="task">
+			<div class="task ${(selectedTask == -1) ? 'taskHover' : ''}">
 				<div class="taskTool">
 					${deleteTool}
 				</div>
