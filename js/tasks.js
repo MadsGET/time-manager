@@ -17,7 +17,6 @@ class Task
 let taskList = [];
 const taskListLimit = 8;
 let selectedTask = -1;
-let hoverIndex = -1;
 
 // Loads tasks into the array.
 function loadTaskList()
@@ -143,20 +142,19 @@ function getTaskButton(index)
 
 	if (index != selectedTask)
 	{ 
-		let hoverCondition = (hoverIndex == index && selectedTask == -1);
 		let deleteTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconDelete);" onClick="removeTask(${index});"></div>`;
 		let openTool = `<div class="taskButton" style="height:100%; width:100%; background-size:60% 60%; background-image: var(--iconOpen);" onClick="selectTask(${index});"></div>`;
 
 		return `
-			<div class="task ${(hoverCondition) ? 'taskHover' : ''}" onmouseover="hoverIndex =${index}; drawView();">
+			<div class="task">
 				<div class="taskTool">
-					${(hoverCondition) ? deleteTool : ''}
+					${deleteTool}
 				</div>
 				<div class="taskName">
 					${(taskActive) ? taskList[index].name : '<del>' + taskList[index].name + '<del>'}
 				</div>
 				<div class="taskTool">
-					${(hoverCondition) ? openTool : ''}
+					${openTool}
 				</div>
 			</div>
 		`;

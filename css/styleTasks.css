@@ -21,16 +21,20 @@
 
 .task
 {
-	height:12.5%;
+	height: 12.5%;
 	width: 100%;
 	margin: auto;
+
 	grid-template-areas: 'taskTool taskName taskTool';
-	grid-template-columns: 0.1fr 1fr 0.1fr;
+	grid-template-columns: 0.0fr 1fr 0.0fr;
 	display: grid;
 }
 
-.taskHover
+.task:hover
 {
+	grid-template-areas: 'taskTool taskName taskTool';
+	grid-template-columns: 0.1fr 1fr 0.1fr;
+	display: grid;
 	background-color: rgba(255, 255, 255, 0.15);
 }
 

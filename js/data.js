@@ -36,7 +36,7 @@ function getContent(contentName)
 	}
 	else if (contentName == 'Tasks') {
 		return `
-			<div class="taskArea" onmouseleave="hoverIndex =-1; drawView();">
+			<div class="taskArea">
 				<div style="grid-area:taskHeader; border-bottom: calc(var(--borderSize) * 2.25) solid;">
 					<div style="width:100%; font-size:200%; margin:0; text-align:center;">${time.days[todaysDate.getDay() - 1].name}</div>
 				</div>
