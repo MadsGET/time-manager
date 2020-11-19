@@ -29,6 +29,12 @@
 	--iconTriangleR : url('images/icon_triangleR.svg');
 }
 
+rect:hover
+{
+	opacity:0.75;
+	outline: var(--borderSize) solid var(--borderColor);
+}
+
 .panel
 {
 	/* Transform */
