@@ -16,15 +16,15 @@
 	--backgroundImage: url('../images/background.png');
 
 	/* Icons */
-	--iconArrowLeft: url('images/icon_arrowL.svg');	
+	--iconArrowLeft	: url('images/icon_arrowL.svg');	
 	--iconArrowRight: url('images/icon_arrowR.svg');
-	--iconArrowUp: url('images/icon_arrowU.svg');	
-	--iconArrowDown: url('images/icon_arrowD.svg');
-	--iconPlay: url('images/icon_play.svg');
-	--iconPause: url('images/icon_pause.svg');
+	--iconArrowUp	: url('images/icon_arrowU.svg');	
+	--iconArrowDown	: url('images/icon_arrowD.svg');
+	--iconPlay		: url('images/icon_play.svg');
+	--iconPause		: url('images/icon_pause.svg');
 	--iconCheckmark : url('images/icon_checkmark.svg');
-	--iconDelete : url('images/icon_delete.svg');
-	--iconOpen : url('images/icon_open.svg');
+	--iconDelete	: url('images/icon_delete.svg');
+	--iconOpen		: url('images/icon_open.svg');
 	--iconTriangleL : url('images/icon_triangleL.svg');
 	--iconTriangleR : url('images/icon_triangleR.svg');
 }

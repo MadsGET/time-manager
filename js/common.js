@@ -57,10 +57,6 @@ window.onbeforeunload = function onPageClosed(event)
 	// Overwrite stored tasklist dataset.
 	saveTaskList();
 
-	/* BUGS RELATED TO SAVING AND COUNTING WHEN TAB IS NOT ACTIVE HAPPENS.
-	   Probably caused by github, but unsure. Safest way to test app is locally.
-	   Possibly on lost page focus that we have calculate timer differently. */
-
 	// Overwrite stored dataset.
 	dataset.overwrite();
 
