@@ -32,8 +32,6 @@ function drawView()
 			}
 		});
 	}
-
-	console.log('draw call');
 }
 
 // Timer view
