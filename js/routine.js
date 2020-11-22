@@ -42,7 +42,7 @@ function updateRoutine()
 	if (routineTick == 0)
 	{
 		// Get stored hours in minutes, and stored minutes.
-		let storedHours = dataset.items[dataIndex].hours / 60;
+		let storedHours = dataset.items[dataIndex].hours * 60;
 		let storedMinutes = dataset.items[dataIndex].minutes;
 
 		// Convert the stored data into a hours and minutes count.
