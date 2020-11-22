@@ -38,7 +38,7 @@ function getContent(contentName)
 		return `
 			<div class="taskArea">
 				<div style="grid-area:taskHeader; border-bottom: calc(var(--borderSize) * 2.25) solid;">
-					<div style="width:100%; font-size:200%; margin:0; text-align:center;">${time.days[todaysDate.getDay() - 1].name}</div>
+					<div style="width:100%; font-size:200%; margin:0; text-align:center;">${time.days[todaysDate.getDay()].name}</div>
 				</div>
 
 				<div class="taskContent">
