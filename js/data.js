@@ -79,7 +79,7 @@ function getContent(contentName)
 			
 			// Setup length modifier and on hover info.
 			let lengthModifier = (dataExists) ? 1 - (diagramObject.items[x] / hourValue) : 0.985;
-			let hoverInfo = `Day ${x} lasted: ${(dataExists) ? diagramObject.items[x] : 0.0} hour(s)`;
+			let hoverInfo = `Day ${x + 1} lasted: ${(dataExists) ? diagramObject.items[x] : 0.0} hour(s)`;
 
 			// Add generated SVG code to pillars variable.
 			pillars += drawPillars(x, diagramObject.items.length, widthValue, lengthModifier, hoverInfo);
