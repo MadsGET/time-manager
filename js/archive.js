@@ -93,7 +93,7 @@ function drawPillars(index, length, widthModifier, heightModifier, hoverInfo)
 {
 	// How much space each pillar is assigned.
 	const fillValue = 91.5 / length;
-	console.log(heightModifier);
+
 	// Max pillar height.
 	const maxHeight = 1;
 	const minHeight = 98;
