@@ -3,8 +3,6 @@ body
 	/* Transform */
 	height: 100vh;
 	width: 100vw;
-	min-height:480px;
-	min-width:640px;
 	margin: 0;
 	
 	/* Text */
@@ -41,6 +39,8 @@ body
 	grid-template-rows: 1.5fr 10fr;
 	grid-template-areas: 'menu' 'content';
 	display: grid;
+
+	border: var(--borderColor) var(--borderSize) solid;
 }
 
 .menu
@@ -72,4 +72,29 @@ body
 	/* Flex */
 	align-content:center;
 	display:flex;
+}
+
+@media only screen and (max-width: 1024px), only screen and (max-height:512px)
+{
+	body, .page
+	{
+		font-size: calc(8px + 0.5vmin);
+		min-height: 256px;
+		min-width: 256px;
+		height: 100vh;
+		width: 100vw;
+	}
+
+	.page
+	{
+		box-sizing: border-box;
+		border: 1vmin solid var(--borderColor);
+	}
+
+	.defaultButton
+	{
+		height:auto;
+		width:auto;
+		padding: 2%;
+	}
 }

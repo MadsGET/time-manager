@@ -10,7 +10,7 @@ let application = null;
 function drawView()
 {
 	application.innerHTML = `
-		<div class="page panel" style="border: var(--borderColor) var(--borderSize) solid;">
+		<div class="page panel">
 				${getMenu(pages[pageIndex])}
 			<div class="contentArea">
 				${getContent(pages[pageIndex])}
