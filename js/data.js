@@ -74,12 +74,12 @@ function getContent(contentName)
 		// Loop through each dataset and create a pillar.
 		for (let x = 0; x < diagramObject.items.length; x++)
 		{
-			// Guard clause; on empty value.
-			if (diagramObject.items[x] == null || diagramObject.items[x] == '') continue;
-
+			// Checks if data exists for current object.
+			let dataExists = (diagramObject.items[x] != null && diagramObject.items[x] != '');
+			
 			// Setup length modifier and on hover info.
-			let lengthModifier = 1 - (diagramObject.items[x] / hourValue);
-			let hoverInfo = `Day ${time.formatNumber(x)} lasted: ${diagramObject.items[x]} hour(s)`;
+			let lengthModifier = (dataExists) ? 1 - (diagramObject.items[x] / hourValue) : 0.985;
+			let hoverInfo = `Day ${x} lasted: ${(dataExists) ? diagramObject.items[x] : 0.0} hour(s)`;
 
 			// Add generated SVG code to pillars variable.
 			pillars += drawPillars(x, diagramObject.items.length, widthValue, lengthModifier, hoverInfo);
@@ -102,7 +102,7 @@ function getContent(contentName)
 
 		// Statistics
 		const averageTime = (diagramObject.totalTime / diagramObject.items.length).toFixed(1);
-		const statisticsL = `<div class="statistics" style="text-align:left;">Total time: ${diagramObject.totalTime} hours</div>`;
+		const statisticsL = `<div class="statistics" style="text-align:left;">Total time: ${parseFloat(diagramObject.totalTime).toFixed(1)} hours</div>`;
 		const statisticsR = `<div class="statistics" style="text-align:right;">Average time: ${averageTime} hours</div>`;
 		
 		return `

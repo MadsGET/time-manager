@@ -68,7 +68,7 @@ function initalizeArchive() // Live update???
 		}
 		else
 		{
-			// Event of there being no data??? Execution to allow a day to be generated before this intilizations??
+			// Event of there being no data???
 			diagramData[i] = null;
 		}
 	}
