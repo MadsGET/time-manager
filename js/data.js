@@ -23,7 +23,7 @@ function getMenu(pageName)
 function getContent(contentName)
 {
 	if (contentName == 'Home') {
-		return `
+		let standard = `
 			<div class="tracker">
 				<div id="clock" class="clock" style="margin-bottom:0; font-size:450%;">
 					2:36pm
@@ -33,6 +33,16 @@ function getContent(contentName)
 				</div>
 			</div>
 		`;
+
+		let start = 	
+			`
+			<div class="sessionStart" onclick="sessionActive = true; drawView();">
+				<p> Click to begin session </p>
+			</div>
+		`;
+
+		return (sessionActive || dataset.items[dataIndex].hasBegun()) ? standard : start;
+
 	}
 	else if (contentName == 'Tasks') {
 		return `

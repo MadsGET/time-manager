@@ -16,3 +16,22 @@
 	text-align:center; 
 	margin:auto;
 }
+
+.sessionStart
+{
+	height: 100%;
+	width: 100%;
+	align-content: center;
+	display: flex;
+}
+
+.sessionStart:hover
+{
+	opacity:0.5;
+}
+
+.sessionStart > p
+{
+	font-size: 500%;
+	margin: auto;
+}

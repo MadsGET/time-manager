@@ -79,6 +79,11 @@ class Subdata
 		this.seconds = parseInt(string.slice(7, 9));
 	}
 
+	hasBegun()
+	{
+		return (this.hours + this.minutes + this.seconds > 0);
+	}
+
 	// Packs the object as a string.
 	pack()
 	{
