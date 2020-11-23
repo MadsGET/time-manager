@@ -93,12 +93,16 @@ function drawPillars(index, length, widthModifier, heightModifier, hoverInfo)
 {
 	// How much space each pillar is assigned.
 	const fillValue = 91.5 / length;
-
+	console.log(heightModifier);
 	// Max pillar height.
 	const maxHeight = 1;
 	const minHeight = 98;
 	const lesserHeight = minHeight * heightModifier;
 	const greaterHeight = minHeight * (1 - heightModifier);
+
+	// Colors
+	const pillarColor = `rgba(255, 255, 255, ${mathf.clamp(1 - heightModifier, 0.05, 0.5)}`;
+	const isCurrentDay = (archivePages[archiveIndex].name == dataset.key && index == todaysDate.getDate() - 1);
 
 	// Calculated pillar width, and calculated leftover.
 	const leftover = fillValue * (1 - widthModifier) / 2;
@@ -111,7 +115,7 @@ function drawPillars(index, length, widthModifier, heightModifier, hoverInfo)
 
 	// Does not draw anything if no data is parsed.
 	return (greaterHeight != 0) ? `
-		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:rgba(255, 255, 255, 0.3); user-select:all;">
+		<rect x="${xPos}%" y="${maxHeight + lesserHeight}%" width="${fillValue * widthModifier}%" height="${greaterHeight}%" style="fill:${(isCurrentDay) ? 'snow' : pillarColor}"; user-select:all;">
 			<title>${hoverInfo}</title>
 		</rect>
 	` : '';
